@@ -1,0 +1,121 @@
+<h4>Formularios <small> reactive </small></h4>
+<hr>
+<form autocomplete="off" (ngSubmit)="guardar()" [formGroup]="forma">
+
+    <div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label mb-3">Name</label>
+            <div class="col-8">
+                <input class="form-control" type="text" placeholder="Name" formControlName="nombre" [class.is-invalid]="nombreNoValido">
+                <small class="text-center" *ngIf="nombreNoValido" class="text-danger"> Enter 5 letters</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label mb-3">Last Name</label>
+            <div class="col-8">
+
+                <input class="form-control mb-3" type="text" placeholder="Last Name" formControlName="apellido" [class.is-invalid]="apellidoNoValido">
+                <small class="text-center" *ngIf="nombreNoValido" class="text-danger">Enter 5 letters </small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label mb-3">Email</label>
+        <div class="col-8">
+            <input class="form-control" type="email" placeholder="Email" formControlName="correo" [class.is-invalid]="correoNoValido">
+            <small *ngIf="correoNoValido" class="text-danger">
+              Invalid Email
+      </small>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label mb-3">New user</label>
+        <div class="col-8">
+            <input class="form-control" type="text" placeholder="New user" formControlName="usuario" [class.is-invalid]="usuarioNoValido">
+            <small *ngIf="usuarioNoValido" class="text-danger">
+              Invalid user
+    </small>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label mb-3">Password</label>
+        <div class="col-8">
+            <input class="form-control" type="text" placeholder="Password" formControlName="pass1" [class.is-invalid]="passwordNoValido">
+            <small *ngIf="passwordNoValido" class="text-danger">
+              Enter correct password
+        </small>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label mb-3">Confirm Password</label>
+        <div class="col-8">
+            <input class="form-control" type="text" placeholder="Confirm Password" formControlName="pass2" [class.is-invalid]="password2NoValido">
+
+        </div>
+    </div>
+
+    <div class="form-group row" formGroupName="direccion">
+        <label class="col-2 col-form-label mb-3">Direction</label>
+        <div class="form-row col-8">
+            <div class="row">
+                <div class="col">
+                    <input class="form-control mb-2" type="text" placeholder="District" formControlName="distrito" [class.is-invalid]="distritoNoValido">
+                    <small *ngIf="distritoNoValido" class="text-danger">
+                      Enter district
+          </small>
+                </div>
+                <div class="col">
+                    <input class="form-control" type="text" placeholder="City" formControlName="ciudad" [class.is-invalid]="ciudadNoValido">
+                    <small *ngIf="ciudadNoValido" class="text-danger">
+                      Enter a city
+          </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5">
+            <table class="table">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Pasatiempo</th>
+                        <th>Borrar</th>
+                    </tr>
+                    <tbody formArrayName="pasatiempos">
+                        <tr *ngFor="let control of pasatiempos.controls; let i=index">
+                            <td>{{i+1}}</td>
+                            <td>
+                                <input class="form-control" type="text" [formControlName]="i">
+                            </td>
+                            <td>
+                                <button class="btn btn-danger" (click)="borrarPasatiempo(i)">
+                Borrar
+              </button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+            </table>
+            <div class="form-group row">
+                <label class="col-2 col-form-label">&nbsp;</label>
+                <div class="d-grid gap-2 col-8 mx-center">
+                    <button type="button" class="btn btn-outline-primary mt-3 mb-4 btn-block" (click)="agregarPasatiempo()">Agregar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">&nbsp;</label>
+            <div class="d-grid gap-2 col-8 mx-center">
+                <button type="submit" class="btn btn-outline-primary btn-block mb-3">Save</button>
+            </div>
+        </div>
